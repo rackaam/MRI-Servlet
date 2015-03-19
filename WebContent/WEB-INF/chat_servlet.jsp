@@ -3,16 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Title of the document</title>
-</head>
+
+<title>Chat</title>
+<link rel="stylesheet" href="design.css"></head>
 <body>
-	<form name="chatForm" action="JSPChat" method="post">
+	<form id="form" name="chatForm" action="JSPChat" method="post">
 		<input type="text" name="ligne" value=""> 
 		<input type="submit" name="action" value="submit"> 
 		<input type="submit" name="action" value="refresh">
-	</form>
-	<pre>
-<%=request.getAttribute("content")%>
+		<input type="submit" name="action" value="logout">		
+	</form>	
+	<pre id="content">
+	Vous &ecirc;tes connect&eacute; en tant que: <%=session.getAttribute("login")%>
+	<%=request.getAttribute("content")%>	
 	</pre>
 </body>
 </html>

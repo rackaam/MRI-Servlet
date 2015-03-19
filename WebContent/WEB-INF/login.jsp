@@ -4,10 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Chat</title>
+<link rel="stylesheet" href="design.css"></head>
 </head>
 <body>
-	<form name="chatForm" action="JSPChat" method="post">
+	<form id="formLogin" name="chatForm" action="JSPChat" method="post">
+		Veillez sasir un login pour acc&eacute;der au chat.
 		<input type="text" name="login"  value=""> 
 		<input type="submit" name="action" value="Login">
 	</form>

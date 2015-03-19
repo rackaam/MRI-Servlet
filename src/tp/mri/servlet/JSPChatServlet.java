@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class JSPChatServlet
+ * Servlet implementation class JSPChatServlet 
  */
 @WebServlet("/JSPChat")
 public class JSPChatServlet extends HttpServlet {
@@ -56,22 +56,31 @@ public class JSPChatServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter("login");
-		if(login != null && login.length() > 0){
-			HttpSession session = request.getSession();
-			session.setAttribute("login", login);
-		}
+		HttpSession session = null;
 		
-		if(request.getSession().getAttribute("login") == null){
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
+		if(login != null && login.length() > 0){
+			session = request.getSession();
+			session.setAttribute("login", login);
+		}		
+		if(request.getSession().getAttribute("login") == null){//Pas de login saisie
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");//on reste sur la page de login
 			request.setAttribute("content", chatContent.toString());
 			rd.include(request, response);
 		}else{
 			String action = request.getParameter("action");
-			if (action != null && action.equals("submit")) {
+			if (action != null && action.equals("submit")) {//Si appuie sur le bouton submit
 				SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-				chatContent.append(sdf.format(new Date()) + ": "
+				chatContent.append(sdf.format(new Date()) + " "+request.getSession().getAttribute("login")+": "
 						+ request.getParameter("ligne") + "\n");
 			}
+			else if (action != null && action.equals("logout")){//Si appuie sur le bouton logout
+				request.getSession().invalidate();//On se détache de la fin de session
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");//On retourne sur la page de login
+				request.setAttribute("content", chatContent.toString());
+				rd.include(request, response);
+				return;
+			}
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/chat_servlet.jsp");
 			request.setAttribute("content", chatContent.toString());
 			rd.include(request, response);

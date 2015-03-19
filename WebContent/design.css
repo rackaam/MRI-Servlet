@@ -1,0 +1,31 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	background-image: url(background.gif);	
+}
+
+#form{	
+	width: 50%;
+	margin: auto;
+	text-align: center;
+	padding-left: 3%;
+	padding-bottom: 5%;
+}
+
+#formLogin{
+	text-align: center;
+	border: solid 2px white;
+	background-color: white;
+	border-radius: 25px;
+	width: 50%;
+	margin: auto;
+}
+
+#content{
+	color: black;
+	border-radius: 25px;
+	background-color: white;	
+	border: solid 2px white;
+	width: 50%;
+	margin: auto;
+}
